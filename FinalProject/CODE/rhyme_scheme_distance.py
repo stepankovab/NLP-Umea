@@ -1,52 +1,59 @@
 import Imports.tagger as tagger
+from lyrics_aligner import align_lyrics_by_section_and_line, get_aligned_translation
 
 
-def get_rhyme_scheme_mapping_accuracy(czech_sections : list[list[str]], english_sections : list[list[str]]) -> float:
-    
-    czech_lines = []
-    for section in czech_sections:
-        czech_lines.extend(section)
-    
-    english_lines = []
-    for section in english_sections:
-        english_lines.extend(section)
-
+def get_section_rhyme_scheme_distance(czech_lines : list[str], english_lines : list[str], rt_cs : tagger.RhymeTagger, rt_en : tagger.RhymeTagger) -> float:
     if len(czech_lines) != len(english_lines):
         raise ValueError("The lyrics differ in number of lines.")
     
     n_lines = len(czech_lines)
 
-    rt_cs = tagger.RhymeTagger()
-    rt_cs.load_model("./Imports/cs", verbose=False)
     rhymes_cs = rt_cs.tag(poem=czech_lines, output_format=1)
-
-    rt_en = tagger.RhymeTagger()
-    rt_en.load_model("./Imports/en", verbose=False)
     rhymes_en = rt_en.tag(poem=english_lines, output_format=1)
 
-    czech_detected = 0
-    czech_agreements = 0
-    english_detected = 0
-    english_agreements = 0
+    distance = 0
+    for i in range(n_lines):
+        difference_set = set(rhymes_en[i]).symmetric_difference(rhymes_cs[i])
+        difference = len(difference_set)
+        distance += (difference / max(len(rhymes_cs[i]), 1)) + (difference / max(len(rhymes_en[i]), 1))
 
-    for i in range(len(rhymes_cs)):
-        cs_line_rhymes = rhymes_cs[i]
-        en_line_rhymes = rhymes_en[i]
+    distance /= (2 * n_lines)
 
-        for number in cs_line_rhymes:
-            czech_detected += 1
-            if number in en_line_rhymes:
-                czech_agreements += 1
-        
-        for number in en_line_rhymes:
-            english_detected += 1
-            if number in cs_line_rhymes:
-                english_agreements += 1
+    return distance
 
 
-    if czech_detected == 0 or english_detected == 0:
-        return 0.0
+
+
+def get_rhyme_scheme_mapping_distance(czech_sections : list[list[str]], english_sections : list[list[str]]) -> float:
+    '''
     
-    accuracy = (czech_agreements/czech_detected + english_agreements/english_detected)/2  * max(czech_detected, english_detected) / n_lines
+    '''
+    rt_cs = tagger.RhymeTagger()
+    rt_cs.load_model("cs", verbose=False)
 
-    return accuracy
+    rt_en = tagger.RhymeTagger()
+    rt_en.load_model("en", verbose=False)
+
+    total_distance = 0
+    for i in range(len(czech_sections)):
+        total_distance += get_section_rhyme_scheme_distance(czech_sections[i], english_sections[i], rt_cs, rt_en)
+
+    total_distance /= len(czech_sections)
+
+    return total_distance
+    
+
+
+
+with open("C:/Users/barca/MOJE/ROCNIKAC/rp-barbora-stepankova/DATA/Musicals/" + "frozen_02" + "_cs.txt", "r", encoding="utf-8") as f:
+    text_cs = f.read()
+
+with open("C:/Users/barca/MOJE/ROCNIKAC/rp-barbora-stepankova/DATA/Musicals/" + "frozen_02" + "_en.txt", "r", encoding="utf-8") as f:
+    text_en = f.read()
+
+
+czech_sections, english_sections = align_lyrics_by_section_and_line(text_cs, text_en)
+
+# eng_translation = get_aligned_translation(czech_sections, "cz")
+
+get_rhyme_scheme_mapping_distance(czech_sections, english_sections)
