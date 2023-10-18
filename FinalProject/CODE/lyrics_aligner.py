@@ -197,8 +197,8 @@ def align_lyrics_by_section_and_line(czech_text : str, english_text : str) -> li
 
     returns aligned lyrics, fist czech then english
     '''
-    czech_lines = [a for a in re.split(r"\s*[,\.\n:!?;]+\s*", re.sub('\n\n', '\n<eos>\n', czech_text)) if re.search('\w+', a)]
-    english_lines = [a for a in re.split(r"\s*[,\.\n:!?;]+\s*", re.sub('\n\n', '\n<eos>\n', english_text)) if re.search('\w+', a)]
+    czech_lines = [a for a in re.split(r"\s*[,\.()\n:!?;]+\s*", re.sub('\n\n', '\n<eos>\n', czech_text)) if re.search('\w+', a)]
+    english_lines = [a for a in re.split(r"\s*[,()\.\n:!?;]+\s*", re.sub('\n\n', '\n<eos>\n', english_text)) if re.search('\w+', a)]
 
     czech_final = []
     english_final = []
@@ -226,6 +226,13 @@ def align_lyrics_by_section_and_line(czech_text : str, english_text : str) -> li
 
             if i_cz + 1 >= len(czech_lines) or i_en + 1 >= len(english_lines):
                 break
+
+        if czech_lines[i_cz][0] == '#' or english_lines[i_en][0] == '#':
+            czech_temp.append(czech_lines[i_cz][1:])
+            english_temp.append(english_lines[i_en][1:])
+            i_cz += 1
+            i_en += 1
+            continue
 
         cz_syl = syllabify(czech_lines[i_cz], "cz")
         en_line_pronounciation = english_to_czech_pron(english_lines[i_en])
@@ -320,9 +327,13 @@ def align_lyrics_by_section_and_line(czech_text : str, english_text : str) -> li
     # after there is just one line left in the shorter lyrics
     czech_final_line = ""
     for i in range(i_cz, len(czech_lines)):
+        if czech_lines[i] == "<eos>":
+            continue
         czech_final_line += czech_lines[i] + ", "
     english_final_line = ""
     for j in range(i_en, len(english_lines)):
+        if english_lines[j] == "<eos>":
+            continue
         english_final_line += english_lines[j] + ", "
     
     czech_temp.append(czech_final_line[:-2])
@@ -395,3 +406,37 @@ def get_aligned_translation(sections, language):
         translated = translated[len(section):]
 
     return translated_sections
+
+
+
+
+
+title = "encanto_01"
+
+
+with open("C:/Users/barca/MOJE/UMEA/NLP-Umea/FinalProject/DATA/Human_translations/" + title + "_cs.txt", "r", encoding="utf-8") as f:
+    text_cs = f.read()
+
+with open("C:/Users/barca/MOJE/UMEA/NLP-Umea/FinalProject/DATA/Human_translations/" + title + "_en.txt", "r", encoding="utf-8") as f:
+    text_en = f.read()
+
+czech_sections, english_sections = align_lyrics_by_section_and_line(text_cs, text_en)
+
+for section_i in range(len(czech_sections)):
+    for line_i in range(len(czech_sections[section_i])):
+        diff = len(syllabify(czech_sections[section_i][line_i], "cz")) - len(syllabify(english_sections[section_i][line_i], "en"))
+        print(czech_sections[section_i][line_i], english_sections[section_i][line_i], "--->", diff)
+    print()
+
+
+if input() == "Y":
+    with open("C:/Users/barca/MOJE/UMEA/NLP-Umea/FinalProject/DATA/Aligned_HT/" + title + "_cs.txt", "w", encoding="utf-8") as cz_doc:
+        for section_i in range(len(czech_sections)):
+            for line_i in range(len(czech_sections[section_i])):
+                cz_doc.write(czech_sections[section_i][line_i] + "\n")
+            cz_doc.write("\n")
+    with open("C:/Users/barca/MOJE/UMEA/NLP-Umea/FinalProject/DATA/Aligned_HT/" + title + "_en.txt", "w", encoding="utf-8") as en_doc:
+        for section_i in range(len(english_sections)):
+            for line_i in range(len(english_sections[section_i])):
+                en_doc.write(english_sections[section_i][line_i] + "\n")
+            en_doc.write("\n")
