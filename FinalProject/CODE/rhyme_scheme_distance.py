@@ -23,10 +23,9 @@ def get_section_rhyme_scheme_distance(czech_lines : list[str], english_lines : l
 
 
 
-
 def get_rhyme_scheme_mapping_distance(czech_sections : list[list[str]], english_sections : list[list[str]]) -> float:
     '''
-    
+    Get a distance between rhymes of two song lyrics.
     '''
     rt_cs = tagger.RhymeTagger()
     rt_cs.load_model("cs", verbose=False)
