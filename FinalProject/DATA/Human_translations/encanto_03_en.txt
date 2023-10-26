@@ -1,6 +1,6 @@
 Don't be upset or mad at all
 Don't feel regret, or sad at all
-Hey, I'm still a part of the family Madrigal
+#Hey I'm still a part of the family Madrigal
 And I'm fine, I am totally fine
 I will stand on the side as you shine
 I'm not fine, I'm not fine
@@ -8,8 +8,8 @@ I'm not fine, I'm not fine
 I can't move the mountains
 I can't make the flowers bloom
 I can't take another night
-Up in my room
-Waiting on a miracle
+Up in my room Waiting on a miracle
+
 I can't heal what's broken
 Can't control the morning rain or a hurricane
 Can't keep down the unspoken invisible pain
@@ -41,7 +41,7 @@ I'm sick of waiting on a miracle
 So here I go
 
 I am ready!
-Come on, I'm ready!
+Come on I'm ready!
 I’ve been patient and steadfast and steady!
 Bless me now as you blessed us all those years ago
 When you gave us a miracle
