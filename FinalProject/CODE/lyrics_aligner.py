@@ -409,11 +409,7 @@ def get_aligned_translation(sections, target_language):
     return translated_sections
 
 
-aa = os.listdir() 
-
-
-title = "encanto_01"
-
+# title = "encanto_01"
 
 # with open("C:/Users/barca/MOJE/UMEA/NLP-Umea/FinalProject/DATA/Human_translations/" + title + "_cs.txt", "r", encoding="utf-8") as f:
 #     text_cs = f.read()
@@ -421,28 +417,14 @@ title = "encanto_01"
 # with open("C:/Users/barca/MOJE/UMEA/NLP-Umea/FinalProject/DATA/Human_translations/" + title + "_en.txt", "r", encoding="utf-8") as f:
 #     text_en = f.read()
 
-czech_sections = []
-with open("C:/Users/barca/MOJE/UMEA/NLP-Umea/FinalProject/DATA/Aligned_HT/" + title + "_cs.txt", "r", encoding="utf-8") as f:
-    lines = f.readlines()
-    temp = []
-    for line in lines:
-        line = line[:-1]
-        if line == "":
-            czech_sections.append(temp.copy())
-            temp.clear()
-        else:
-            temp.append(line)
-
-english_sections = get_aligned_translation(czech_sections, "en")
-
 
 # czech_sections, english_sections = align_lyrics_by_section_and_line(text_cs, text_en)
 
-for section_i in range(len(czech_sections)):
-    for line_i in range(len(czech_sections[section_i])):
-        diff = len(syllabify(czech_sections[section_i][line_i], "cz")) - len(syllabify(english_sections[section_i][line_i], "en"))
-        print(czech_sections[section_i][line_i], " --- ", english_sections[section_i][line_i], "--->", diff)
-    print()
+# for section_i in range(len(czech_sections)):
+#     for line_i in range(len(czech_sections[section_i])):
+#         diff = len(syllabify(czech_sections[section_i][line_i], "cz")) - len(syllabify(english_sections[section_i][line_i], "en"))
+#         print(czech_sections[section_i][line_i], " --- ", english_sections[section_i][line_i], "--->", diff)
+#     print()
 
 
 # if input() == "Y":

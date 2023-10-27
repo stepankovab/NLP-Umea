@@ -26,7 +26,7 @@ def phoneme_distinct2(section : list[str], language : str) -> float:
             
             bigram_dict[bigram] += 1
 
-    return len(bigram_dict)/bigram_count
+    return len(bigram_dict)/ max(bigram_count,1)
 
 
 def get_phoneme_repetition_similarity(czech_sections : list[list[str]], english_sections : list[list[str]]) -> float:

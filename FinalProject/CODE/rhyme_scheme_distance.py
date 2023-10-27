@@ -17,7 +17,7 @@ def get_section_rhyme_scheme_distance(czech_lines : list[str], english_lines : l
         distance += (difference / max(len(rhymes_cs[i]), 1)) + (difference / max(len(rhymes_en[i]), 1))
 
     a = abs((len(rhymes_cs) - rhymes_cs.count([])) - (len(rhymes_en) - rhymes_en.count([])))
-    distance =  distance * (a + 0.5) / (2 * n_lines)
+    distance =  distance * (a + 0.5) / max((2 * n_lines), 1)
 
     return distance
 
@@ -44,15 +44,15 @@ def get_rhyme_scheme_mapping_distance(czech_sections : list[list[str]], english_
 
 
 
-with open("C:/Users/barca/MOJE/ROCNIKAC/rp-barbora-stepankova/DATA/Musicals/" + "frozen_03" + "_cs.txt", "r", encoding="utf-8") as f:
-    text_cs = f.read()
+# with open("C:/Users/barca/MOJE/ROCNIKAC/rp-barbora-stepankova/DATA/Musicals/" + "frozen_03" + "_cs.txt", "r", encoding="utf-8") as f:
+#     text_cs = f.read()
 
-with open("C:/Users/barca/MOJE/ROCNIKAC/rp-barbora-stepankova/DATA/Musicals/" + "frozen_03" + "_en.txt", "r", encoding="utf-8") as f:
-    text_en = f.read()
+# with open("C:/Users/barca/MOJE/ROCNIKAC/rp-barbora-stepankova/DATA/Musicals/" + "frozen_03" + "_en.txt", "r", encoding="utf-8") as f:
+#     text_en = f.read()
 
 
-czech_sections, english_sections = align_lyrics_by_section_and_line(text_cs, text_en)
+# czech_sections, english_sections = align_lyrics_by_section_and_line(text_cs, text_en)
 
-english_sections = get_aligned_translation(czech_sections, "cz")
+# english_sections = get_aligned_translation(czech_sections, "cz")
 
-print(get_rhyme_scheme_mapping_distance(czech_sections, english_sections))
+# print(get_rhyme_scheme_mapping_distance(czech_sections, english_sections))
