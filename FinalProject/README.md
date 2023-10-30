@@ -4,7 +4,7 @@ The topic of song singability is widely discussed in the linguistic and human tr
 
 My goal for this research project is to implement already proposed metrics, as well as come up with my own to quantify the singability of a song in a few numbers.
 
-After implementing the metrics, I will compare performance of the original human-translated lyrics, machine-translated lyrics, and chatGPT-translated lyrics, upon a command: "Translate these lyrics while keeping the singability."
+After implementing the metrics, I will compare performance of the original human-translated lyrics and machine-translated lyrics.
 
 The goal is to find out how big of a performance distance is between these three methods of lyrics translation, and if there is any difference between the experiments when I switch target and source language.
 
