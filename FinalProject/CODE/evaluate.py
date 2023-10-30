@@ -105,14 +105,9 @@ scores["cz_to_en"] = []
 scores["en_to_cz"] = []
 
 filenames = os.listdir("C:/Users/barca/MOJE/UMEA/NLP-Umea/FinalProject/DATA/Aligned_HT") 
-lst = list(range(len(filenames)))
-indicies = lst[0::10]
-
 
 czech_og = []
 counter = 0
-
-filenames = ["frozen_03_cs.txt"]
 
 for filename in filenames:
 
@@ -133,12 +128,6 @@ for filename in filenames:
                 temp.append(line)
 
     english_sections = get_aligned_translation(og_sections, "en")
-
-    for sec in english_sections:
-        for line in sec:
-            print(line)
-        print()
-
     
 
     if filename[-6:] == "en.txt":
