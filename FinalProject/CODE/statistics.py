@@ -11,7 +11,7 @@ averages_HT = []
 averages_cs_to_en = []
 averages_en_to_cs = []
 
-i = 5
+i = 0
 
 for j in range(songs):
     if i == 1:
