@@ -104,7 +104,7 @@ def get_syllable_part_sound_mapping_dict():
         pickle.dump(pair_dict, model_file)
 
 
-def get_sound_mapping_distance(czech_sections, english_sections):
+def get_phoneme_syllable_mapping_distance(czech_sections, english_sections):
     distance = 0
 
     with lzma.open("C:/Users/barca/MOJE/UMEA/NLP-Umea/FinalProject/DATA/pair.dict", "rb") as model_file:
@@ -173,23 +173,4 @@ def get_sound_mapping_distance(czech_sections, english_sections):
 
 
 # get_syllable_part_sound_mapping_dict()
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
 

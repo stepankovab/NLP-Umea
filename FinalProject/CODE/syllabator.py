@@ -64,7 +64,7 @@ def syllabify(text : str, language : str) -> list[str]:
         # Get syllables: mask the word and split the mask
         for syllable_mask in _split_mask(_create_word_mask(word)):
             word_syllable = ""
-            for character in syllable_mask:
+            for _ in syllable_mask:
                 word_syllable += word[letter_counter]
                 letter_counter += 1
 

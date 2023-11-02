@@ -1,6 +1,4 @@
 import Imports.tagger as tagger
-from lyrics_aligner import align_lyrics_by_section_and_line, get_aligned_translation
-
 
 def get_section_rhyme_scheme_distance(czech_lines : list[str], english_lines : list[str], rt_cs : tagger.RhymeTagger, rt_en : tagger.RhymeTagger) -> float:
     if len(czech_lines) != len(english_lines):
@@ -41,18 +39,3 @@ def get_rhyme_scheme_mapping_distance(czech_sections : list[list[str]], english_
 
     return total_distance
     
-
-
-
-# with open("C:/Users/barca/MOJE/ROCNIKAC/rp-barbora-stepankova/DATA/Musicals/" + "frozen_03" + "_cs.txt", "r", encoding="utf-8") as f:
-#     text_cs = f.read()
-
-# with open("C:/Users/barca/MOJE/ROCNIKAC/rp-barbora-stepankova/DATA/Musicals/" + "frozen_03" + "_en.txt", "r", encoding="utf-8") as f:
-#     text_en = f.read()
-
-
-# czech_sections, english_sections = align_lyrics_by_section_and_line(text_cs, text_en)
-
-# english_sections = get_aligned_translation(czech_sections, "cz")
-
-# print(get_rhyme_scheme_mapping_distance(czech_sections, english_sections))

@@ -34,9 +34,9 @@ p_value = stats.ttest_rel(
 print("p value is " + str(p_value))
 
 if p_value <= alpha:
-    print('Reject H0 - cs-en is more than HT')
+    print('Reject H0 - Alternative holds true')
 else:
-    print('H0 holds true - HT is more than cs-en')
+    print('H0 holds true')
 
 p_value = stats.ttest_rel(
     averages_HT,
@@ -47,9 +47,9 @@ p_value = stats.ttest_rel(
 print("p value is " + str(p_value))
 
 if p_value <= alpha:
-    print('Reject H0 - en-cs is more than HT')
+    print('Reject H0 - Alternative holds true')
 else:
-    print('H0 holds true - HT is more than en-cs')
+    print('H0 holds true')
 
 p_value = stats.ttest_rel(
     averages_cs_to_en,
@@ -60,9 +60,9 @@ p_value = stats.ttest_rel(
 print("p value is " + str(p_value))
 
 if p_value <= alpha:
-    print('Reject H0 - en-cs is more than cs-en')
+    print('Reject H0 - Alternative holds true')
 else:
-    print('H0 holds true - cs-en is more than en-cs')
+    print('H0 holds true')
 
 
 print("HT", sum(averages_HT)/songs)

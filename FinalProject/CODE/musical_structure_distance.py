@@ -9,6 +9,9 @@ def musical_dissimilarity(section1 : list[str], section2 : list[str], language :
 
 
 def get_musical_structure_distance(czech_sections : list[list[str]], english_sections : list[list[str]]) -> float:
+    '''
+    Get the distance between the musical structure of the lyrics.
+    '''
     
     if len(czech_sections) != len(english_sections):
         raise ValueError("The lyrics differ in number of sections.")

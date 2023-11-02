@@ -1,6 +1,9 @@
 from syllabator import syllabify
 
 def get_line_syllable_count_distance(czech_sections : list[list[str]], english_sections : list[list[str]]) -> float:
+    '''
+    Get the distance of syllable counts averaged over lines.
+    '''
     
     czech_lines = []
     for section in czech_sections:
